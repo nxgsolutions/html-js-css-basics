@@ -1,0 +1,110 @@
+body {
+    font-family: "Roboto", "Arial", "sans-serif";
+}
+
+h1 {
+    font-size: 18px;
+}
+
+h2 {
+    font-size: 16px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: white;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    padding: inherit;
+}
+
+label {
+    margin-bottom: 5px;
+    /* font-weight: bold; */
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"],
+input[type="date"],
+select,
+textarea {
+    width: -webkit-fill-available;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+input::placeholder {
+    color: #999;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    position: relative;
+    left: 50%;
+}
+.is-invalid{
+    border-color: rgb(223, 86, 86) !important;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+.danger-alert {
+    background-color: #f35e5e;
+    color: white;
+    padding: 10px;
+    border-radius: 5px
+}
+
+table {
+    margin-left: -6px;
+    padding: 3px;
+}
+.field-error{
+    color: #ec7878;
+    margin-top: -8px;
+}
+.table input{
+    margin-bottom: -2px;
+}
+.table select{
+    margin-bottom: -2px;
+}
+@media only screen and (max-width: 900px) {
+    .container {
+        display: flow;
+
+    }
+
+    button {
+        position: inherit;
+    }
+}

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet"> -->
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <title>Registration Form</title>
+
+</head>
+
+<body>
+    <div>
+        <h1 style="text-align: center;">Registration Form</h1>
+        <!-- <li>* Marked fields are required</li> -->
+    </div>
+
+    <form action="success.html" method="GET" autocomplete="off" id="reg_form">
+        <div class="container">
+
+            <div class="column">
+                <h2>Personal Information</h2>
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" maxlength="60" placeholder="Dhiraj" required
+                    data='{"required":"First Name is Required"}' data-target="name_error">
+                <small id="name_error" class="field-error"></small>
+
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" maxlength="60" placeholder="Sahu" required
+                    data-target="lastname_error" data='{"required":"Last Name is Required"}' max="2023-08-18">
+                <small id="lastname_error" class="field-error"></small>
+
+                <label for="dob">Date of Birth *</label>
+                <input type="date" id="dob" name="dob" required data-target="dob_error"
+                    data='{"required":"Date of Birth is Required"}' onchange="javascript:DOBvalidation(event)">
+                <small id="dob_error" class="field-error"></small>
+
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" maxlength="250" placeholder="example@example.com" required
+                    data-target="email_error" data='{"required":"Email is Required"}'
+                    oninvalid="this.setCustomValidity('Please Enter valid email')">
+                <small id="email_error" class="field-error"></small>
+
+                <label for="mobile">Mobile *</label>
+                <input type="tel" id="mobile" onkeypress="javascript:return ismobile(event)" name="mobile"
+                    placeholder="9630920XXX" required maxlength="10" minlength="10" data-target="mobile_error"
+                    data='{"required":"Mobile is Required"}'>
+                <small id="mobile_error" class="field-error"></small>
+
+                <label for="idCard">ID Card Upload (Aadhar/Driving Licence) *</label>
+                <input type="file" id="idCard" onchange="imageValidation(event)" name="idCard"
+                    accept=".jpg, .jpeg, .png,.pdf" required data-target="idCard_error"
+                    data='{"required":"ID Card is Required"}'>
+                <small id="idCard_error" class="field-error"></small>
+
+                <label for="degreeCertificate">Degree Certificate Upload *</label>
+                <input type="file" id="degreeCertificate"
+                    onformchange="imageValidation(event.target,'degreeCertificate')" name="degreeCertificate"
+                    accept=".pdf,.jpg, .jpeg, .png" required data-target="degreeCertificate_error"
+                    data='{"required":"Degree is Required"}'>
+                <small id="degreeCertificate_error" class="field-error"></small>
+
+                <label for="aboutMe">About me *</label>
+                <textarea id="aboutMe" name="aboutMe" rows="4" cols="30" maxlength="1000"
+                    placeholder="Write a brief introduction..." required style="resize: none;" data-target="about_error"
+                    data='{"required":"About me is Required"}'></textarea>
+                <small id="about_error" class="field-error"></small>
+
+                <label for="experience">Years of Experience</label>
+                <table class="table">
+                    <tr>
+                        <td><label for="availability">Years*</label>
+                            <input type="text" id="exp_year" onkeypress="javascript:return ismobile(event)"
+                                name="experience" placeholder="Ex. 2" maxlength="2" required style="text-align: right;"
+                                data-target="exp_year_error" data='{"required":"Year is Required"}'>
+                            <small id="exp_year_error" class="field-error"></small>
+                        </td>
+                        <td><label for="availability">Months*</label>
+                            <input type="text" id="exp_month" onkeypress="javascript:return ismobile(event)"
+                                name="experience" placeholder="Ex. 10" maxlength="2" required style="text-align: right;"
+                                data-target="exp_month_error" data='{"required":"Month is Required"}'>
+                            <small id="exp_month_error" class="field-error"></small>
+                        </td>
+                    </tr>
+                </table>
+
+
+            </div>
+            <div class="column">
+                <h2>Address Information</h2>
+                <label for="address1">Address Line 1 *</label>
+                <input type="text" id="address1" name="address1" maxlength="120" placeholder="123 Main Street" required
+                    data-target="address1_error" data='{"required":"Address is Required"}'>
+                <small id="address1_error" class="field-error"></small>
+
+                <label for="address2">Address Line 2</label>
+                <input type="text" id="address2" name="address2" maxlength="250" placeholder="Apartment 4B">
+
+
+                <label for="country">Country *</label>
+                <select type="text" id="countries" name="country" maxlength="60" placeholder="India" required
+                    data-target="country_error" data='{"required":"Country is Required"}'
+                    onchange="getStateData(event)">
+
+                </select>
+                <small id="country_error" class="field-error"></small>
+
+                <label for="state">State *</label>
+                <select type="text" id="state" name="state" maxlength="120" placeholder="Delhi" required
+                    data-target="state_error" data='{"required":"State is Required"}' onchange="getCityData(event)">
+                    <option value="">---Select---</option>
+                </select>
+                <small id="state_error" class="field-error"></small>
+
+                <label for="city">City *</label>
+                <select type="text" id="city" name="city" maxlength="120" placeholder="Noida" required
+                    data-target="city_error" data='{"required":"City is Required"}'>
+                    <option value="">---Select---</option>
+                </select>
+                <small id="city_error" class="field-error"></small>
+
+                <label for="country" id="postal_code_lable">Postal Code *</label>
+                <input type="text" id="postal_code" onkeypress="javascript:return ismobile(event)" name="country"
+                    placeholder="Postal code" required maxlength="6" minlength="6"
+                    data-target="postal_code_error" data='{"required":"PIN code is Required"}'>
+                <small id="postal_code_error" class="field-error"></small>
+
+                <h2>Course Information</h2>
+                <table class="table">
+                    <tr>
+                        <td style="width: 100%;">
+                            <label for="class">Class *</label>
+                            <select>
+                                <option value="6">6th</option>
+                                <option value="7">7th</option>
+                                <option value="8">8th</option>
+                                <option value="9">9th</option>
+                                <option value="10">10th</option>
+                                <option value="11">11th</option>
+                                <option value="12">12th</option>
+
+                            </select>
+                        </td>
+                        <td>
+                            <label for="year">Joining Year *</label>
+                            <input type="text" id="year" onkeypress="javascript:return ismobile(event) " name="year"
+                                placeholder="Ex. 2023" required maxlength="4" minlength="4" style="text-align: right;"
+                                data-target="year_error" data='{"required":"Joining Year is Required"}'>
+                            <small id="year_error" class="field-error"></small>
+
+                        </td>
+                    </tr>
+                </table>
+                <label style="margin-top: 20px;"> Course Interested *</label>
+                <table>
+                    <tr>
+                        <td><label for="basicCourse"><input type="radio" id="basicCourse" checked name="course"
+                                    value="Basic"> Basic</label>
+                        </td>
+                        <td> <label for="advancedCourse"> <input type="radio" id="advancedCourse" name="course"
+                                    value="Advance">Advance</label></td>
+
+                    </tr>
+                </table>
+                <label style="margin-top: 20px;">Subject *</label>
+                <small id="subject_error" class="field-error"></small>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <label for="subject1"> <input type="checkbox" id="subject1" name="subjects[]"
+                                    value="Subject 1"> Hindi</label>
+                        <td>
+                            <label for="subject2"> <input type="checkbox" id="subject2" name="subjects[]"
+                                    value="Subject 2"> English</label>
+                        </td>
+                        <td>
+                            <label for="subject3"> <input type="checkbox" id="subject3" name="subjects[]"
+                                    value="Subject 3"> Maths</label>
+
+                        </td>
+                    </tr>
+                </table>
+                <label style="margin-top: 20px;">Availability*</label>
+                <table cellspacing="5" class="table">
+                    <tr>
+                        <td> <label for="availability">From Date*</label> <input type="date" id="from_date"
+                                name="availability" required style="width: -webkit-fill-available;"
+                                onchange="dateValidate()" data-target="from_date_error"
+                                data='{"required":"From Date is Required"}'>
+                            <small id="from_date_error" class="field-error"></small>
+                        </td>
+                        <td> <label for="availability">To Date*</label> <input type="date" id="to_date"
+                                name="availability" required style="width: -webkit-fill-available;"
+                                onchange="dateValidate()" data-target="to_date_error"
+                                data='{"required":"To Date is Required"}'>
+                            <small id="to_date_error" class="field-error"></small>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><small class="field-error" id="date_error">From date cannot be greater than to
+                                date</small></td>
+                    </tr>
+                </table>
+                <!-- <label class="danger-alert" id="formError">Please Fill All The Mandetory Fields!</label> -->
+            </div>
+
+            <button type="submit" id="submit_button" required="false" onclick="return validateForm()">Register
+                Now</button>
+
+        </div>
+    </form>
+
+</body>
+
+</html>
+<script>
+    let AllCountries = "";
+    let selectedCountryState = "";
+    document.getElementById("firstName").focus()
+    $("#formError").hide();
+    $("#date_error").hide();
+
+    getcountryData()
+    function getcountryData() {
+        const select = document.getElementById('countries');
+        const countryIso= ["IND","USA","CAN"];
+        fetch('./countries_states_cities.json')
+            .then((response) => response.json())
+            .then((json) => {
+                let countries = '<option value="">---Select---</option>';
+                // console.log("json", json),
+                json.forEach(country => {
+                    // console.log(country.name)
+                    countries += countryIso.includes(country.iso3) && `<option value="${country.iso3}">${country.name}</option>`;
+                })
+                select.innerHTML = countries;
+                AllCountries = json;
+            });
+        //  console.log("countries", c);
+
+    }
+
+    function getStateData(event) {
+        selectedCountry = AllCountries.find((country) => country.iso3 == event.target.value);
+        postal_input= document.getElementById("postal_code");
+        city_input= document.getElementById("city");
+        postal_input.value="";
+        city_input.innerHTML="<option value=''>---Select---</option>";
+        console.log("selectedCountryState", selectedCountry.postal_code_digit)
+        document.getElementById("postal_code_lable").innerHTML=selectedCountry.postal_code_text+" Code *";
+        postal_input.setAttribute("maxlength",selectedCountry.postal_code_digit);
+        postal_input.setAttribute("placeholder",selectedCountry.postal_code_digit+" digits [0-9] "+selectedCountry.postal_code_text+" code");
+        let states = "<option value=''>---Select---</option>";
+
+        selectedCountry.states.forEach(state => {
+            // console.log(country.name)
+            states += `<option value="${state.id}">${state.name}</option>`;
+        }
+        )
+        document.getElementById("state").innerHTML = states;
+    }
+    function getCityData(event) {
+        selectedStateCities = selectedCountry.states.find((state) => state.id == event.target.value).cities;
+
+        console.log("gettingCity", selectedCountry.cities)
+        let cities = "<option value=''>---Select---</option>";
+        selectedStateCities.forEach(city => {
+            // console.log(country.name)
+            cities += `<option value="${city.id}">${city.name}</option>`;
+        }
+        )
+        document.getElementById("city").innerHTML = cities;
+    }
+</script>
